@@ -296,6 +296,11 @@ class CamApp(App):
         # detect faces in the image
         results = detector.detect_faces(image_rgb)
         
+        # check if any faces were detected
+        if len(results) == 0:
+            # handle the case when no faces are found
+            return None
+        
         # extract the bounding box from the first face
         x1, y1, width, height = results[0]['box']
         # bug fix
@@ -309,6 +314,11 @@ class CamApp(App):
     
     def img_to_encoding(self, image_path, model):
         face = self.extract_face(image_path, required_size=(160, 160))
+        
+        if face is None:
+            # Handle the case when no face is found
+            return None
+        
         img = tf.image.resize(face, (160, 160))
         img = np.around(np.array(img) / 255.0, decimals=12)
         x_train = np.expand_dims(img, axis=0)
@@ -323,10 +333,16 @@ class CamApp(App):
         cv2.imwrite(SAVE_PATH, frame)
         
         encoding = self.img_to_encoding(SAVE_PATH, self.model)
-        dist = np.linalg.norm(encoding - self.database[self.identity])
+        dist = 100
+        if encoding is not None:
+            dist = np.linalg.norm(encoding - self.database[self.identity])
+        
         if dist < 0.7:
-            self.verification_label.text = "It's " + str(self.identity) + ", welcome in!"
+            self.verification_label.text = "It's " + str(self.identity) + ", verification successfully completed"
             door_open = True 
+        elif dist == 100:
+            self.verification_label.text = "No Face detected"
+            door_open = False
         else:
             self.verification_label.text = "It's not " + str(self.identity) + ", please go away"
             door_open = False

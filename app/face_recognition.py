@@ -272,12 +272,23 @@ class CamApp(App):
         
         return layout
     
+    
     # Run continuously to get webcam feed
     def update(self, *args):
         # Read frame from openc
         ret, frame = self.capture.read()
         
         frame = cv2.flip(frame, 1)
+        
+        """
+        # Bounding the face with rectangle
+        sample_coords = self.extract_coord(frame)
+        if sample_coords[0]:
+            cv2.rectangle(frame, 
+                            tuple(sample_coords[:2]),
+                            tuple(sample_coords[2:]), 
+                                    (255,0,0), 2)
+        """
         
         # Flip horizontall and convert image to texture
         buf = cv2.flip (frame, 0).tobytes()
@@ -311,6 +322,11 @@ class CamApp(App):
         # detect faces in the image
         results = detector.detect_faces(image_rgb)
         
+        # check if any faces were detected
+        if len(results) == 0:
+            # handle the case when no faces are found
+            return None
+        
         # extract the bounding box from the first face
         x1, y1, width, height = results[0]['box']
         # bug fix
@@ -322,8 +338,39 @@ class CamApp(App):
         
         return face
     
+    """
+    def extract_coord(self, image, required_size=(160, 160)):
+        
+        # create the detector, using default weights
+        detector = mtcnn.MTCNN()
+        # detect faces in the image
+        results = detector.detect_faces(image)
+        
+        x1, y1, x2, y2 = 0, 0, 0, 0
+        if results:
+            # extract the bounding box from the first face
+            x1, y1, width, height = results[0]['box']
+            # bug fix
+            x1, y1 = abs(x1), abs(y1)
+            x2, y2 = x1 + width, y1 + height
+        
+        # extract the coords
+        sample_coords = (x1, y1, x2, y2)
+        
+        return sample_coords
+    
+    """
+    
+    
+    
+    
     def img_to_encoding(self, image_path, model):
         face = self.extract_face(image_path, required_size=(160, 160))
+        
+        if face is None:
+            # Handle the case when no face is found
+            return None
+        
         img = tf.image.resize(face, (160, 160))
         img = np.around(np.array(img) / 255.0, decimals=12)
         x_train = np.expand_dims(img, axis=0)
@@ -339,31 +386,35 @@ class CamApp(App):
         
         encoding = self.img_to_encoding(SAVE_PATH, self.model)
         
+        
         min_dist = 100
-    
-        # Loop over the database dictionary's names and encodings.
-        for (name, db_enc) in self.database.items():
-            
-            # Compute L2 distance between the target "encoding" and the current db_enc from the database. (≈ 1 line)
-            dist = np.linalg.norm(encoding - db_enc)
+        if encoding is not None:
+            # Loop over the database dictionary's names and encodings.
+            for (name, db_enc) in self.database.items():
+                
+                # Compute L2 distance between the target "encoding" and the current db_enc from the database. (≈ 1 line)
+                dist = np.linalg.norm(encoding - db_enc)
 
-            # If this distance is less than the min_dist, then set min_dist to dist, and identity to name. (≈ 3 lines)
-            if dist < min_dist:
-                min_dist = dist
-                identity = name
+                # If this distance is less than the min_dist, then set min_dist to dist, and identity to name. (≈ 3 lines)
+                if dist < min_dist:
+                    min_dist = dist
+                    identity = name
                 
     
         if min_dist < 0.7:
             self.verification_label.text = "It's " + str(identity) + ", welcome in!"
             door_open = True 
+        elif min_dist == 100:
+            self.verification_label.text = "No face detected"
+            door_open = False
         else:
             self.verification_label.text = "Not in the database. " + str(min_dist)
             door_open = False
         
         # Log out details
-        Logger.info(dist)
+        Logger.info(min_dist)
         Logger.info(door_open)
-        return dist, door_open
+        return min_dist, door_open
     
          
 if __name__ == '__main__':

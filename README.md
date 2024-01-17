@@ -27,7 +27,7 @@ Git hub repositories
 [5]: https://github.com/nyoki-mtl/keras-facenet/blob/master/notebook/tf_to_keras.ipynb
 [6]: https://github.com/davidsandberg/facenet
 ## Demo
-![fast](https://drive.google.com/file/d/116_wsb0Pj-JZsspmfVPefW_RhLgfwoxz/view?usp=drive_link)
+![fast](https://private-user-images.githubusercontent.com/62949953/297286942-b7d6a8e1-7300-4d10-b000-f240e0d5d995.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDU0NzUwODEsIm5iZiI6MTcwNTQ3NDc4MSwicGF0aCI6Ii82Mjk0OTk1My8yOTcyODY5NDItYjdkNmE4ZTEtNzMwMC00ZDEwLWIwMDAtZjI0MGUwZDVkOTk1LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAxMTclMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMTE3VDA2NTk0MVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWYxYzZiZTlmM2RmZDJiODgxYjlkNWJlZWU1YWVlYWZlZGFjOTI4NmQ5NjJiNzhlY2NkYjI3MDk1NGFlMzg5YjAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.G2kgrFjehMG4-Ecr2YfIQi3hsaQ69G_vw8N0zCpi2RE)
 
 
 ## Run Locally
@@ -35,29 +35,38 @@ Git hub repositories
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/NurNazaR/Face-Recognition-and-Verification-with-FaceNet-model.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd face_id
 ```
 
 Install dependencies
 
 ```bash
-  npm install
+  pip install -r requirements.txt
 ```
 
-Start the server
+Upload your photo to the  'database (people)' folder and  Rename the file 'fullname.jpg'
+
+Run the face recognition application
 
 ```bash
-  npm run start
+  python app/face_recognition.py
+```
+
+Modify the variable self.identity in the face_verification.py file to your full name
+
+Run the face verification application
+```bash
+  python app/face_verification.py
 ```
 
 
-## Documentation
+## License
 
-[Documentation](https://linktodocumentation)
+[MIT](https://choosealicense.com/licenses/mit/)
 
