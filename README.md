@@ -26,8 +26,9 @@ Git hub repositories
 [4]: https://machinelearningmastery.com/how-to-develop-a-face-recognition-system-using-facenet-in-keras-and-an-svm-classifier/
 [5]: https://github.com/nyoki-mtl/keras-facenet/blob/master/notebook/tf_to_keras.ipynb
 [6]: https://github.com/davidsandberg/facenet
-## Demo
-![fast](https://private-user-images.githubusercontent.com/62949953/297286942-b7d6a8e1-7300-4d10-b000-f240e0d5d995.gif?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDU1ODQ1NDksIm5iZiI6MTcwNTU4NDI0OSwicGF0aCI6Ii82Mjk0OTk1My8yOTcyODY5NDItYjdkNmE4ZTEtNzMwMC00ZDEwLWIwMDAtZjI0MGUwZDVkOTk1LmdpZj9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAxMTglMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMTE4VDEzMjQwOVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWJkOTFiNDk5Y2QxZTA3YWU3Mzg0OWVlMWI5OWE3YjIxZmY2YzQ3NjQ0Y2Q4NTc5NDMxODI1NTllYTFiZTZkMjgmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.NvpAjFJKxM-kNne9B6modtB_7ZbweyPRM3QFM2VxkbM)
+## Demo (click to view video)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/eXjEtZkBgeg/0.jpg)](https://www.youtube.com/watch?v=eXjEtZkBgeg)
+
 
 
 ## Run Locally
